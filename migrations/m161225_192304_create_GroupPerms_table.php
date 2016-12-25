@@ -18,6 +18,7 @@ class m161225_192304_create_GroupPerms_table extends Migration
         $this->createTable('GroupPerms', [
             'group_id' => $this->integer()->notNull(),
             'perm' => $this->string(255)->notNull(),
+            'PRIMARY KEY(group_id, perm)',
         ]);
 
         // creates index for column `group_id`
