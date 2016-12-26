@@ -49,6 +49,10 @@ $config = [
             'rules' => [
             ],
         ],
+        'session' => [
+            'class' => 'yii\web\CacheSession',
+            // 'cache' => 'mycache',
+        ]
     ],
     'params' => $params,
 ];
@@ -58,6 +62,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        'allowedIPs' => ['140.123.*.*'],
     ];
 
     $config['bootstrap'][] = 'gii';
