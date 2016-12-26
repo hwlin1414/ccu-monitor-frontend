@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Hosts;
-use yii\data\ActiveDataProvider;
+use app\models\search\HostsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,11 +35,11 @@ class HostsController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Hosts::find(),
-        ]);
+        $searchModel = new HostsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

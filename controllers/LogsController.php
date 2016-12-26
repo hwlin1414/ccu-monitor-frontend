@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Logs;
-use yii\data\ActiveDataProvider;
+use app\models\search\LogsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,11 +35,11 @@ class LogsController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Logs::find(),
-        ]);
+        $searchModel = new LogsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
