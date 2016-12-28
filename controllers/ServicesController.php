@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\filters\AccessControl;
 use app\models\Services;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -20,6 +21,9 @@ class ServicesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

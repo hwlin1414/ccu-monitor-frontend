@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\filters\AccessControl;
 use app\models\HostContact;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -20,6 +21,9 @@ class HostContactController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

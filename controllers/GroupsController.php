@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\filters\AccessControl;
 use app\models\Groups;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
