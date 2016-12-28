@@ -23,8 +23,8 @@ class m161225_193446_create_Users_table extends Migration
             'enabled' => $this->boolean()->notNull(),
             'verified' => $this->boolean()->notNull(),
             'registedip' => $this->string(15)->notNull(),
-            'created_at' => $this->timestamp()->notNull(),
-            'updated_at' => $this->timestamp()->notNull(),
+            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),#->append('ON UPDATE CURRENT_TIMESTAMP'),
         ]);
 
         // creates index for column `group_id`

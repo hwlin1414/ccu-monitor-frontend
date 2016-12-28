@@ -19,6 +19,7 @@ class m161225_195533_create_Logs_table extends Migration
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
             'ip' => $this->string(15)->notNull(),
+            'level' => $this->string(15) -> notNull(),
             'action' => $this->string(63)->notNull(),
             'description' => $this->string(255)->notNull(),
             'created_at' => $this->timestamp()->notNull(),
