@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ip')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'level')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'action')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>

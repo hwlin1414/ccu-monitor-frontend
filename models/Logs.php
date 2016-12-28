@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $user_id
  * @property string $ip
+ * @property string $level
  * @property string $action
  * @property string $description
  * @property string $created_at
@@ -33,9 +34,9 @@ class Logs extends \yii\db\ActiveRecord
     {
         return [
             [['user_id'], 'integer'],
-            [['ip', 'action', 'description'], 'required'],
+            [['ip', 'level', 'action', 'description'], 'required'],
             [['created_at'], 'safe'],
-            [['ip'], 'string', 'max' => 15],
+            [['ip', 'level'], 'string', 'max' => 15],
             [['action'], 'string', 'max' => 63],
             [['description'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -51,6 +52,7 @@ class Logs extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'ip' => 'Ip',
+            'level' => 'Level',
             'action' => 'Action',
             'description' => 'Description',
             'created_at' => 'Created At',

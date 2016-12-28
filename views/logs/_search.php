@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ip') ?>
 
+    <?= $form->field($model, 'level') ?>
+
     <?= $form->field($model, 'action') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?php // echo $form->field($model, 'description') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

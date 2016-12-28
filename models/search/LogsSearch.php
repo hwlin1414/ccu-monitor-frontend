@@ -19,7 +19,7 @@ class LogsSearch extends Logs
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['ip', 'action', 'description', 'created_at'], 'safe'],
+            [['ip', 'level', 'action', 'description', 'created_at'], 'safe'],
         ];
     }
 
@@ -65,6 +65,7 @@ class LogsSearch extends Logs
         ]);
 
         $query->andFilterWhere(['like', 'ip', $this->ip])
+            ->andFilterWhere(['like', 'level', $this->level])
             ->andFilterWhere(['like', 'action', $this->action])
             ->andFilterWhere(['like', 'description', $this->description]);
 
