@@ -10,6 +10,24 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
+$this->registerCss("
+    @media only screen and (min-width : 992px) {
+        .footer {
+            margin-left: 240px;
+        }
+        .wrap2 > .container {
+            padding-top: 0px;
+            width: 90%;
+        }
+        .wrap2{
+            padding-left: 250px;
+        }
+    }
+");
+
+$this->registerJs(" $('.button-collapse').sideNav();");
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -25,47 +43,48 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
+    <ul id="slide-out" class="side-nav fixed">
+        <li>
+            <div class="userView">
+                <div class="background">
+                    <?= Html::img('@web/images/office.jpg', ['width' => 300]) ?>
+                </div>
+            </div>
+        </li>
+        <li><?= Html::a(Yii::t('yii', 'Home'), ['/site/index'], ['class' => 'waves-effect']) ?></li>
+        <li><?= Html::a('說明', ['/site/about'], ['class' => 'waves-effect']) ?></li>
+        <li><div class="divider"></div></li>
+        <?php
+            if(Yii::$app->user->isGuest){
+                echo Html::a('登入', ['/site/login'], ['class' => 'waves-effect']);
+            }else{
+                echo '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
+                    ['class' => 'btn btn-link waves-effect logout']
                 )
                 . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+                . '</li>';
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+            }
+        ?>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+    <div class="wrap2">
+        <div class="container">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= $content ?>
+        </div>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Campus Network Association <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
