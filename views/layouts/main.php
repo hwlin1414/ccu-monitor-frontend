@@ -26,7 +26,7 @@ $this->registerCss("
     }
 ");
 
-$this->registerJs(" $('.button-collapse').sideNav();");
+$this->registerJs("$('.button-collapse').sideNav();");
 
 ?>
 <?php $this->beginPage() ?>
@@ -51,7 +51,7 @@ $this->registerJs(" $('.button-collapse').sideNav();");
                 </div>
             </div>
         </li>
-        <li><?= Html::a(Yii::t('yii', 'Home'), ['/site/index'], ['class' => 'waves-effect']) ?></li>
+        <li><?= Html::a(Yii::t('yii', 'Home'), Yii::$app->homeUrl, ['class' => 'waves-effect']) ?></li>
         <li><?= Html::a('說明', ['/site/about'], ['class' => 'waves-effect']) ?></li>
         <li><div class="divider"></div></li>
         <?php
