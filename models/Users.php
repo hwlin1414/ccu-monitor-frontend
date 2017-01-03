@@ -177,4 +177,9 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return password_verify($password, $this->password);
     }
+
+    public function hasPermission($controller, $action)
+    {
+        return $this->group->hasPermission($controller, $action);
+    }
 }

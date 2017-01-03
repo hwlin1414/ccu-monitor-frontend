@@ -58,7 +58,15 @@ $this->registerJs("$('.button-collapse').sideNav();");
             if(Yii::$app->user->isGuest){
                 echo Html::a('登入', ['/site/login'], ['class' => 'waves-effect']);
             }else{
-                echo '<li>'
+                echo "<li>" . Html::a('通知設定', ['/contacts/index'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li>" . Html::a('主機設定', ['/hosts/index'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li><div class='divider'></div></li>\n";
+                echo "<li>" . Html::a('帳號設定', ['/users/index'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li>" . Html::a('群組設定', ['/groups/index'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li>" . Html::a('系統設定', ['/global-config/index'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li><div class='divider'></div></li>\n";
+                echo "<li>" . Html::a('個人資料', ['/users/self'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li>"
                 . Html::a(
                     '登出 (' . Yii::$app->user->identity->name . ')',
                     ['/site/logout'],
@@ -67,8 +75,7 @@ $this->registerJs("$('.button-collapse').sideNav();");
                         'data-method' => 'POST',
                     ]
                 )
-                . '</li>';
-
+                . "</li>\n";
             }
         ?>
     </ul>
