@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -7,45 +9,35 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>校園設備監控系統</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">歡迎來到校園設備監控系統</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>
 
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-6">
+                <h4>深入了解</h4>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                <p>本系統由CNA提供，用來測試校園網路、網站、設備是否正常運作，並會在發現問題後進行email通知。</p>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-6">
+                <h4>關於系統</h4>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                <p>
+                    本系統由以下軟體構成：
+                    <ul>
+                        <li><?= Html::a('FreeBSD', 'https://www.freebsd.org/', ['target' => '_blank']) ?></li>
+                        <li><?= Html::a('Nagios Core', 'https://www.nagios.org/', ['target' => '_blank']) ?></li>
+                        <li><?= Html::a('Nginx', 'https://nginx.org/', ['target' => '_blank']) ?></li>
+                        <li><?= Html::a('PHP', 'http://www.php.net/', ['target' => '_blank']) ?></li>
+                        <li><?= Html::a('MariaDB', 'https://mariadb.org/', ['target' => '_blank']) ?></li>
+                        <li><?= Html::a('Redis', 'https://redis.io/', ['target' => '_blank']) ?></li>
+                        <li><?= Html::a('Yii Framework', 'http://www.yiiframework.com/', ['target' => '_blank']) ?></li>
+                    </ul>
+                </p>
             </div>
         </div>
 

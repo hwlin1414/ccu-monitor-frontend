@@ -59,12 +59,14 @@ $this->registerJs("$('.button-collapse').sideNav();");
                 echo Html::a('登入', ['/site/login'], ['class' => 'waves-effect']);
             }else{
                 echo '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link waves-effect logout']
+                . Html::a(
+                    '登出 (' . Yii::$app->user->identity->username . ')',
+                    ['/site/logout'],
+                    [
+                        'class' => 'waves-effect logout',
+                        'data-method' => 'POST',
+                    ]
                 )
-                . Html::endForm()
                 . '</li>';
 
             }
