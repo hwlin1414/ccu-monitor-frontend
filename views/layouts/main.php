@@ -60,7 +60,7 @@ $this->registerJs("$('.button-collapse').sideNav();");
             }else{
                 echo '<li>'
                 . Html::a(
-                    '登出 (' . Yii::$app->user->identity->username . ')',
+                    '登出 (' . Yii::$app->user->identity->name . ')',
                     ['/site/logout'],
                     [
                         'class' => 'waves-effect logout',

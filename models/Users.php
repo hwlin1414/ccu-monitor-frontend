@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\base\NotSupportedException;
 
 /**
  * This is the model class for table "Users".
@@ -23,7 +24,7 @@ use Yii;
  * @property Services[] $services
  * @property Groups $group
  */
-class Users extends \yii\db\ActiveRecord
+class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
@@ -68,6 +69,11 @@ class Users extends \yii\db\ActiveRecord
         ];
     }
 
+    public function setPassword($password)
+    {
+        $this->password = password_hash('admin', PASSWORD_BCRYPT);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -106,5 +112,69 @@ class Users extends \yii\db\ActiveRecord
     public function getGroup()
     {
         return $this->hasOne(Groups::className(), ['id' => 'group_id']);
+    }
+
+/* Implements IdentityInterface */
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return null;
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username)
+    {
+        return static::findOne(['name' => $username]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAuthKey()
+    {
+        throw new NotSupportedException();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function validateAuthKey($authKey)
+    {
+        throw new NotSupportedException();
+    }
+
+    /**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        return password_verify($password, $this->password);
     }
 }
