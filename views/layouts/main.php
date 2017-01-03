@@ -61,9 +61,25 @@ $this->registerJs("$('.button-collapse').sideNav();");
                 echo "<li>" . Html::a('通知設定', ['/contacts/index'], ['class' => 'waves-effect']) . "</li>\n";
                 echo "<li>" . Html::a('主機設定', ['/hosts/index'], ['class' => 'waves-effect']) . "</li>\n";
                 echo "<li><div class='divider'></div></li>\n";
+echo <<<EOD
+    <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+    <li>
+    <a class="collapsible-header">系統管理<i class="material-icons">arrow_drop_down</i></a>
+    <div class="collapsible-body">
+    <ul>
+EOD;
                 echo "<li>" . Html::a('帳號設定', ['/users/index'], ['class' => 'waves-effect']) . "</li>\n";
                 echo "<li>" . Html::a('群組設定', ['/groups/index'], ['class' => 'waves-effect']) . "</li>\n";
                 echo "<li>" . Html::a('系統設定', ['/global-config/index'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li>" . Html::a('系統紀錄', ['/logs/index'], ['class' => 'waves-effect']) . "</li>\n";
+echo <<<EOD
+    </ul>
+    </div>
+    </li>
+    </ul>
+    </li>
+EOD;
                 echo "<li><div class='divider'></div></li>\n";
                 echo "<li>" . Html::a('個人資料', ['/users/self'], ['class' => 'waves-effect']) . "</li>\n";
                 echo "<li>"

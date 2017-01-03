@@ -4,14 +4,14 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = '校園設備監控系統';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
         <h1>校園設備監控系統</h1>
 
-        <p class="lead">歡迎來到校園設備監控系統</p>
+        <p class="lead">歡迎使用校園設備監控系統</p>
 
     </div>
 
@@ -36,6 +36,12 @@ $this->title = 'My Yii Application';
                         <li><?= Html::a('MariaDB', 'https://mariadb.org/', ['target' => '_blank']) ?></li>
                         <li><?= Html::a('Redis', 'https://redis.io/', ['target' => '_blank']) ?></li>
                         <li><?= Html::a('Yii Framework', 'http://www.yiiframework.com/', ['target' => '_blank']) ?></li>
+                    </ul>
+                </p>
+                <p>
+                    專案開源於：
+                    <ul>
+                        <li><?= Html::a('github', 'https://github.com/hwlin1414/ccu-monitor-frontend', ['target' => '_blank']) ?></li>
                     </ul>
                 </p>
             </div>
