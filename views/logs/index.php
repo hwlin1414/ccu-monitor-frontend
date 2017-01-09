@@ -24,13 +24,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'user_id',
+            //'id',
             'ip',
             'level',
+            [
+                //'user_id',
+                'format' => 'raw',
+                'attribute' => 'user_id',
+                'value' => function($model, $key, $index, $widget){
+                    if(is_null($model->user)) return null;
+                    return Html::a(Html::encode($model->user->name), ['/users/view', 'id' => $model->user_id]);
+                },
+            ],
             'action',
-            // 'description',
-            // 'created_at',
+             'description',
+             'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
