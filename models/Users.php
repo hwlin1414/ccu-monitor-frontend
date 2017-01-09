@@ -43,7 +43,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['name', 'password', 'group_id', 'enabled', 'verified', 'registedip'], 'required'],
             [['group_id', 'enabled', 'verified'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name'], 'string', 'max' => 63],
+            [['name'], 'string', 'max' => 63, 'min' => 5],
             [['password'], 'string', 'max' => 255],
             [['registedip'], 'string', 'max' => 15],
             [['name'], 'unique'],
