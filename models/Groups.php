@@ -63,11 +63,21 @@ class Groups extends \yii\db\ActiveRecord
 
     public function hasPermission($controller, $action)
     {
-        return !is_null(GroupPerms::find()
+        $cacheKey = ['cache-perm', 'id' => $this->id, 'controller' => $controller, 'action' => $action];
+        $data = Yii::$app->cache->get($cacheKey);
+
+        if ($data === false || !is_int($data)) {
+            // $data is not found in cache, calculate it from scratch
+            $data = intval(GroupPerms::find()
             ->where(['group_id' => $this->id, 'perm' => $controller.'/'.$action])
             ->orWhere(['group_id' => $this->id, 'perm' => $controller.'/*'])
             ->orWhere(['group_id' => $this->id, 'perm' => $controller])
             ->orWhere(['group_id' => $this->id, 'perm' => '*'])
-            ->one());
+            ->count());
+
+            // store $data in cache so that it can be retrieved next time
+            Yii::$app->cache->set($cacheKey, $data, 7200);
+        }
+        return $data !== 0;
     }
 }
