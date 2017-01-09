@@ -41,7 +41,7 @@ $this->title = '校園設備監控系統';
                 <p>
                     專案開源於：
                     <ul>
-                        <li><?= Html::a('github', 'https://github.com/hwlin1414/ccu-monitor-frontend', ['target' => '_blank']) ?></li>
+                        <li><?= Html::a('GitHub', 'https://github.com/hwlin1414/ccu-monitor-frontend', ['target' => '_blank']) ?></li>
                     </ul>
                 </p>
             </div>
