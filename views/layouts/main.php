@@ -69,8 +69,8 @@ echo <<<EOD
     <div class="collapsible-body">
     <ul>
 EOD;
-                echo "<li>" . Html::a('帳號設定', ['/users/index'], ['class' => 'waves-effect']) . "</li>\n";
-                echo "<li>" . Html::a('群組設定', ['/groups/index'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li>" . Html::a('帳號管理', ['/users/index'], ['class' => 'waves-effect']) . "</li>\n";
+                echo "<li>" . Html::a('群組管理', ['/groups/index'], ['class' => 'waves-effect']) . "</li>\n";
                 echo "<li>" . Html::a('系統設定', ['/global-config/index'], ['class' => 'waves-effect']) . "</li>\n";
                 echo "<li>" . Html::a('系統紀錄', ['/logs/index'], ['class' => 'waves-effect']) . "</li>\n";
 echo <<<EOD
