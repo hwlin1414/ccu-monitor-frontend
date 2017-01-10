@@ -25,7 +25,7 @@ class AccessControl extends ActionFilter
         $controllerId = $action->controller->id;
         $actionId = $action->id;
         if (!$user->identity->hasPermission($controllerId, $actionId)){
-            throw new ForbiddenHttpException(Yii::t('yii', '你沒有權限存取!!!'));
+            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
             return false;
         }
         return true;
