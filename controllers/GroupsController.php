@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\filters\AccessControl;
 use app\models\Groups;
+use app\models\GroupPerms;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -21,6 +22,9 @@ class GroupsController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -52,8 +56,14 @@ class GroupsController extends Controller
      */
     public function actionView($id)
     {
+        $dataProvider = new ActiveDataProvider([
+            'query' => GroupPerms::find(['group_id' => $id]),
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
+            'permmodel' => (new GroupPerms()),
         ]);
     }
 
@@ -73,6 +83,24 @@ class GroupsController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Creates a new GroupPerms model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreatePerms($id)
+    {
+        $model = new GroupPerms();
+
+        if ($model->load(Yii::$app->request->post())){
+            $model->group_id = $id;
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $id]);
+            }
+        }
+        return $this->redirect(['view', 'id' => $id]);
     }
 
     /**
@@ -105,6 +133,24 @@ class GroupsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Deletes an existing GroupPerms model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $group_id
+     * @param string $perm
+     * @return mixed
+     */
+    public function actionDeletePerms($group_id, $perm)
+    {
+        $model = GroupPerms::findOne(['group_id' => $group_id, 'perm' => $perm]);
+        if(is_null($model)){
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        $model->delete();
+
+        return $this->redirect(['view', 'id' => $group_id]);
     }
 
     /**

@@ -31,6 +31,7 @@ class Groups extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 63],
+            [['name'], 'trim'],
         ];
     }
 
@@ -41,7 +42,7 @@ class Groups extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => '群組名稱',
         ];
     }
 

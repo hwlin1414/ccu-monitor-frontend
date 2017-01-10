@@ -32,6 +32,14 @@ class GroupPerms extends \yii\db\ActiveRecord
             [['group_id'], 'integer'],
             [['perm'], 'string', 'max' => 255],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Groups::className(), 'targetAttribute' => ['group_id' => 'id']],
+            [['perm'], 'trim'],
+        ];
+    }
+
+    public function scenarios()
+    {
+        return [
+            'create' => ['perm'],
         ];
     }
 
@@ -42,7 +50,7 @@ class GroupPerms extends \yii\db\ActiveRecord
     {
         return [
             'group_id' => 'Group ID',
-            'perm' => 'Perm',
+            'perm' => '權限',
         ];
     }
 
