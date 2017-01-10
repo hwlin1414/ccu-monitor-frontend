@@ -53,6 +53,11 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'groups' => 'groups/index',
+                'groups/<id:\d+>' => 'groups/view',
+                'groups/<id:\d+>/update' => 'groups/update',
+                'groups/<id:\d+>/delete' => 'groups/delete',
+                'groups/<group_id:\d+>/delete-perms' => 'groups/delete-perms',
             ],
         ],
         'session' => [

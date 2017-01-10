@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\widgets\ActiveForm;
 
 
@@ -19,10 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
-        <?= Html::submitButton('新增', ['class' => 'btn']) ?>
+
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
+
+        <?= Html::createSubmit() ?>
     </div>
 
     <?php ActiveForm::end(); ?>

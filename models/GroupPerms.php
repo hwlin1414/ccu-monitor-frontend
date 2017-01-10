@@ -39,7 +39,7 @@ class GroupPerms extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            'create' => ['perm'],
+            'default' => ['perm'],
         ];
     }
 

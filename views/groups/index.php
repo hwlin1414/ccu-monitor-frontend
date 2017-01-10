@@ -16,8 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            #['class' => 'yii\grid\SerialColumn'],
-
             'id',
             [
                 'attribute' => 'name',
@@ -26,13 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(Html::encode($model->name), ['/groups/view', 'id' => $model->id]);
                 }
             ],
-            [
-                'format' => 'raw',
-                'value' => function($model, $key, $index, $widget){
-                    return Html::deleteButton(['delete', 'id' => $model->id]);
-                }
-            ]
-            #['class' => 'yii\grid\ActionColumn'],
+            #[
+            #    'format' => 'raw',
+            #    'value' => function($model, $key, $index, $widget){
+            #        return Html::deleteButton(['delete', 'id' => $model->id]);
+            #    }
+            #]
         ],
     ]); ?>
 

@@ -50,10 +50,10 @@ $this->params['breadcrumbs'][] = $model->name;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($permmodel, 'perm')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($permmodel, 'perm')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
 
     <div class="form-group">
-        <?= Html::createButton(['create-perms']) ?>
+        <?= Html::createSubmit(['view', 'id' => $model->id]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

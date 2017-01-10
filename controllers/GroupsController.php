@@ -56,14 +56,26 @@ class GroupsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        $permmodel = new GroupPerms();
+        if ($permmodel->load(Yii::$app->request->post())){
+            $permmodel->group_id = $id;
+            if($permmodel->save()){
+                Yii::info("新增群組權限({$model->id}): {$model->name} -> \"{$permmodel->perm}\"", 'app\groups\view');
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
         $dataProvider = new ActiveDataProvider([
-            'query' => GroupPerms::find(['group_id' => $id]),
+            'query' => GroupPerms::find()->where(['group_id' => $id]),
         ]);
 
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             'dataProvider' => $dataProvider,
-            'permmodel' => (new GroupPerms()),
+            'permmodel' => $permmodel,
         ]);
     }
 
@@ -77,30 +89,13 @@ class GroupsController extends Controller
         $model = new Groups();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::info("新增群組({$model->id}): {$model->name}", 'app\groups\view');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
-    }
-
-    /**
-     * Creates a new GroupPerms model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreatePerms($id)
-    {
-        $model = new GroupPerms();
-
-        if ($model->load(Yii::$app->request->post())){
-            $model->group_id = $id;
-            if($model->save()){
-                return $this->redirect(['view', 'id' => $id]);
-            }
-        }
-        return $this->redirect(['view', 'id' => $id]);
     }
 
     /**
@@ -112,8 +107,10 @@ class GroupsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $name = $model->name;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::info("修改群組({$model->id}): {$name} -> {$model->name}", 'app\groups\view');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -130,7 +127,11 @@ class GroupsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        Yii::info("刪除群組({$model->id}): {$model->name}", 'app\groups\view');
+
+        $model->delete();
 
         return $this->redirect(['index']);
     }
@@ -144,13 +145,17 @@ class GroupsController extends Controller
      */
     public function actionDeletePerms($group_id, $perm)
     {
-        $model = GroupPerms::findOne(['group_id' => $group_id, 'perm' => $perm]);
-        if(is_null($model)){
+        $model = $this->findModel($group_id);
+
+        $permmodel = GroupPerms::findOne(['group_id' => $group_id, 'perm' => $perm]);
+        if(is_null($permmodel)){
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        $model->delete();
 
-        return $this->redirect(['view', 'id' => $group_id]);
+        Yii::info("刪除群組權限({$model->id}): {$model->name} -> \"{$permmodel->perm}\"", 'app\groups\view');
+        $permmodel->delete();
+
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**

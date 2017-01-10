@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -19,10 +19,10 @@ $this->params['breadcrumbs'][] = '修改';
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('修改', ['class' => 'btn']) ?>
+            <?= Html::updateSubmit() ?>
         </div>
 
         <?php ActiveForm::end(); ?>
