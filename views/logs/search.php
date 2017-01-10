@@ -1,11 +1,15 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\search\LogsSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->title = '搜尋';
+$this->params['breadcrumbs'][] = ['label' => '系統紀錄', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="logs-search">
@@ -15,8 +19,6 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
     <?= $form->field($model, 'user_id') ?>
 
     <?= $form->field($model, 'ip') ?>
@@ -25,13 +27,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'action') ?>
 
-    <?php // echo $form->field($model, 'description') ?>
+    <?= $form->field($model, 'description') ?>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+    <?= $form->field($model, 'created_at') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::updateSubmit('搜尋') ?>
     </div>
 
     <?php ActiveForm::end(); ?>

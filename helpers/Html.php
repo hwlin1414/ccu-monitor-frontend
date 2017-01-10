@@ -6,7 +6,7 @@ use yii\helpers\BaseHtml;
 
 class Html extends BaseHtml
 {
-    function createSubmit($url = ['create'], $name = null, $options = [])
+    function createSubmit($name = null, $options = [])
     {
         if(is_null($name)) $name = '新增';
 
@@ -28,7 +28,7 @@ class Html extends BaseHtml
         return Html::a($name, $url, $options);
     }
 
-    function updateSubmit($url = ['update'], $name = null, $options = [])
+    function updateSubmit($name = null, $options = [])
     {
         if(is_null($name)) $name = '修改';
 

@@ -50,12 +50,12 @@ class Logs extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'ip' => 'Ip',
-            'level' => 'Level',
-            'action' => 'Action',
-            'description' => 'Description',
-            'created_at' => 'Created At',
+            'user_id' => '使用者',
+            'ip' => 'IP',
+            'level' => '等級',
+            'action' => '動作',
+            'description' => '描述',
+            'created_at' => '時間',
         ];
     }
 

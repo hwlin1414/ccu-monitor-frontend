@@ -1,34 +1,27 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\LogsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Logs';
+$this->title = '系統紀錄';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="logs-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <p>
-        <?= Html::a('Create Logs', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            //'id',
             'ip',
             'level',
             [
-                //'user_id',
                 'format' => 'raw',
                 'attribute' => 'user_id',
                 'value' => function($model, $key, $index, $widget){
@@ -37,10 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'action',
-             'description',
-             'created_at',
-
-            #['class' => 'yii\grid\ActionColumn'],
+            'description',
+            'created_at',
         ],
     ]); ?>
+
+    <p>
+        <?= Html::updateButton(['search'], '搜尋') ?>
+    </p>
 </div>

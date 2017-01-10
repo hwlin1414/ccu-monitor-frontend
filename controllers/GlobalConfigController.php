@@ -49,18 +49,6 @@ class GlobalConfigController extends Controller
     }
 
     /**
-     * Displays a single GlobalConfig model.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new GlobalConfig model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -105,8 +93,9 @@ class GlobalConfigController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
+        $model->delete();
         return $this->redirect(['index']);
     }
 

@@ -62,7 +62,7 @@ class GroupsController extends Controller
         if ($permmodel->load(Yii::$app->request->post())){
             $permmodel->group_id = $id;
             if($permmodel->save()){
-                Yii::info("新增群組權限({$model->id}): {$model->name} -> \"{$permmodel->perm}\"", 'app\groups\view');
+                Yii::warning("新增群組權限({$model->id}): {$model->name} -> \"{$permmodel->perm}\"", 'app\groups\view');
 
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -89,7 +89,7 @@ class GroupsController extends Controller
         $model = new Groups();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::info("新增群組({$model->id}): {$model->name}", 'app\groups\view');
+            Yii::warning("新增群組({$model->id}): {$model->name}", 'app\groups\view');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -110,7 +110,7 @@ class GroupsController extends Controller
         $name = $model->name;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::info("修改群組({$model->id}): {$name} -> {$model->name}", 'app\groups\view');
+            Yii::warning("修改群組({$model->id}): {$name} -> {$model->name}", 'app\groups\view');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -129,7 +129,7 @@ class GroupsController extends Controller
     {
         $model = $this->findModel($id);
 
-        Yii::info("刪除群組({$model->id}): {$model->name}", 'app\groups\view');
+        Yii::warning("刪除群組({$model->id}): {$model->name}", 'app\groups\view');
 
         $model->delete();
 
@@ -152,7 +152,7 @@ class GroupsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        Yii::info("刪除群組權限({$model->id}): {$model->name} -> \"{$permmodel->perm}\"", 'app\groups\view');
+        Yii::warning("刪除群組權限({$model->id}): {$model->name} -> \"{$permmodel->perm}\"", 'app\groups\view');
         $permmodel->delete();
 
         return $this->redirect(['view', 'id' => $model->id]);

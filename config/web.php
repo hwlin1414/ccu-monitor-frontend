@@ -58,6 +58,7 @@ $config = [
                 'groups/<id:\d+>/update' => 'groups/update',
                 'groups/<id:\d+>/delete' => 'groups/delete',
                 'groups/<group_id:\d+>/delete-perms' => 'groups/delete-perms',
+                'logs' => 'logs/index',
             ],
         ],
         'session' => [
@@ -73,7 +74,8 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        'allowedIPs' => ['140.123.*.*'],
+        #'allowedIPs' => ['140.123.*.*'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
