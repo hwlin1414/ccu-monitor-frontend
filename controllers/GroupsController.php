@@ -89,7 +89,7 @@ class GroupsController extends Controller
         $model = new Groups();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::warning("新增群組({$model->id}): {$model->name}", 'app\groups\view');
+            Yii::warning("新增群組({$model->id}): {$model->name}", 'app\groups\create');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -110,7 +110,7 @@ class GroupsController extends Controller
         $name = $model->name;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::warning("修改群組({$model->id}): {$name} -> {$model->name}", 'app\groups\view');
+            Yii::warning("修改群組({$model->id}): {$name} -> {$model->name}", 'app\groups\update');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -129,7 +129,7 @@ class GroupsController extends Controller
     {
         $model = $this->findModel($id);
 
-        Yii::warning("刪除群組({$model->id}): {$model->name}", 'app\groups\view');
+        Yii::warning("刪除群組({$model->id}): {$model->name}", 'app\groups\delete');
 
         $model->delete();
 
@@ -152,7 +152,7 @@ class GroupsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        Yii::warning("刪除群組權限({$model->id}): {$model->name} -> \"{$permmodel->perm}\"", 'app\groups\view');
+        Yii::warning("刪除群組權限({$model->id}): {$model->name} -> \"{$permmodel->perm}\"", 'app\groups\delete-perms');
         $permmodel->delete();
 
         return $this->redirect(['view', 'id' => $model->id]);

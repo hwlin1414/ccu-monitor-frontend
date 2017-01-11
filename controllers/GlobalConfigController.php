@@ -58,7 +58,8 @@ class GlobalConfigController extends Controller
         $model = new GlobalConfig();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->key]);
+            Yii::warning("新增系統設定: {$model->key} -> \"{$model->value}\"", 'app\global-config\create');
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -75,9 +76,11 @@ class GlobalConfigController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $value = $model->value;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->key]);
+            Yii::warning("修改系統設定: {$model->key}: \"{$value}\" -> \"{$model->value}\"", 'app\global-config\update');
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -94,6 +97,7 @@ class GlobalConfigController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
+        Yii::warning("刪除系統設定: {$model->key}", 'app\global-config\delete');
 
         $model->delete();
         return $this->redirect(['index']);

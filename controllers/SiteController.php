@@ -76,7 +76,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            Yii::info('Login('.Yii::$app->user->identity->name.')', 'app\site\login');
+            Yii::info(Yii::$app->user->identity->name.' 登入', 'app\site\login');
             return $this->goBack();
         }
         return $this->render('login', [
@@ -91,7 +91,7 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::info('Logout('.Yii::$app->user->identity->name.')', 'app\site\logout');
+        Yii::info(Yii::$app->user->identity->name.' 登出', 'app\site\logout');
         Yii::$app->user->logout();
 
         return $this->goHome();

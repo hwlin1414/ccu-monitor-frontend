@@ -32,6 +32,7 @@ class Groups extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['name'], 'string', 'max' => 63],
             [['name'], 'trim'],
+            [['name'], 'unique'],
         ];
     }
 

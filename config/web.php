@@ -53,6 +53,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'global-config' => 'global-config/index',
+                'global-config/create' => 'global-config/create',
+                'global-config/<id:[-.a-zA-Z0-9]+>' => 'global-config/update',
+                'global-config/<id:[-.a-zA-Z0-9]+>/delete' => 'global-config/delete',
                 'groups' => 'groups/index',
                 'groups/<id:\d+>' => 'groups/view',
                 'groups/<id:\d+>/update' => 'groups/update',
@@ -75,7 +79,6 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         #'allowedIPs' => ['140.123.*.*'],
-        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';

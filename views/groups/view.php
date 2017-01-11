@@ -48,12 +48,12 @@ $this->params['breadcrumbs'][] = $model->name;
 
 <div class="group-perms-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['action' => ['view', 'id' => $model->id]]); ?>
 
     <?= $form->field($permmodel, 'perm')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
 
     <div class="form-group">
-        <?= Html::createSubmit(['view', 'id' => $model->id]) ?>
+        <?= Html::createSubmit() ?>
     </div>
 
     <?php ActiveForm::end(); ?>

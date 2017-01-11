@@ -1,21 +1,34 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
+use yii\widgets\ActiveForm;
 
 
 /* @var $this yii\web\View */
 /* @var $model app\models\GlobalConfig */
 
-$this->title = 'Create Global Config';
-$this->params['breadcrumbs'][] = ['label' => 'Global Configs', 'url' => ['index']];
+$this->title = '新增設定';
+$this->params['breadcrumbs'][] = ['label' => '系統設定', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="global-config-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<div class="global-config-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
+
+    <div class="form-group">
+        <?= Html::createSubmit() ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>

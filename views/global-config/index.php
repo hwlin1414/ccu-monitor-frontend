@@ -1,30 +1,39 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Global Configs';
+$this->title = '系統設定';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="global-config-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <p>
-        <?= Html::a('Create Global Config', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'key',
+            [
+                'attribute' => 'key',
+                'format' => 'raw',
+                'value' => function($model, $key, $index, $widget){
+                    return Html::a(Html::encode($model->key), ['update', 'id' => $model->key]);
+                }
+            ],
             'value',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'format' => 'raw',
+                'value' => function($model, $key, $index, $widget){
+                    return Html::deleteButton(['delete', 'id' => $model->key]);
+                }
+            ],
         ],
     ]); ?>
+
+    <p>
+        <?= Html::createButton() ?>
+    </p>
 </div>

@@ -29,6 +29,7 @@ class GlobalConfig extends \yii\db\ActiveRecord
             [['key', 'value'], 'required'],
             [['key'], 'string', 'max' => 63],
             [['value'], 'string', 'max' => 255],
+            [['key'], 'unique'],
         ];
     }
 
@@ -38,8 +39,8 @@ class GlobalConfig extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'key' => 'Key',
-            'value' => 'Value',
+            'key' => '參數',
+            'value' => '值',
         ];
     }
 }

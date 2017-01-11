@@ -1,21 +1,31 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\GlobalConfig */
 
-$this->title = 'Update Global Config: ' . $model->key;
-$this->params['breadcrumbs'][] = ['label' => 'Global Configs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->key, 'url' => ['view', 'id' => $model->key]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = '更新設定';
+$this->params['breadcrumbs'][] = ['label' => '系統設定', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->key;
 ?>
 <div class="global-config-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<div class="global-config-form">
+
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
+
+    <div class="form-group">
+        <?= Html::updateSubmit() ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
 
 </div>
