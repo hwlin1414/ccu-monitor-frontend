@@ -135,16 +135,16 @@
         },
         {
             "name": "bower-asset/materialize",
-            "version": "v0.97.6",
+            "version": "v0.97.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dogfalo/materialize.git",
-                "reference": "793e5716040cb133041b55be75b1fae51debb9f3"
+                "reference": "c0bf0b7e71e4763bb2aa31f8100c7e0e97964cec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dogfalo/materialize/zipball/793e5716040cb133041b55be75b1fae51debb9f3",
-                "reference": "793e5716040cb133041b55be75b1fae51debb9f3",
+                "url": "https://api.github.com/repos/Dogfalo/materialize/zipball/c0bf0b7e71e4763bb2aa31f8100c7e0e97964cec",
+                "reference": "c0bf0b7e71e4763bb2aa31f8100c7e0e97964cec",
                 "shasum": ""
             },
             "require": {
@@ -154,22 +154,7 @@
             "extra": {
                 "bower-asset-main": [
                     "bin/materialize.css",
-                    "bin/materialize.js",
-                    "fonts/roboto/Roboto-Bold.ttf",
-                    "fonts/roboto/Roboto-Bold.woff",
-                    "fonts/roboto/Roboto-Bold.woff2",
-                    "fonts/roboto/Roboto-Light.ttf",
-                    "fonts/roboto/Roboto-Light.woff",
-                    "fonts/roboto/Roboto-Light.woff2",
-                    "fonts/roboto/Roboto-Medium.ttf",
-                    "fonts/roboto/Roboto-Medium.woff",
-                    "fonts/roboto/Roboto-Medium.woff2",
-                    "fonts/roboto/Roboto-Regular.ttf",
-                    "fonts/roboto/Roboto-Regular.woff",
-                    "fonts/roboto/Roboto-Regular.woff2",
-                    "fonts/roboto/Roboto-Thin.ttf",
-                    "fonts/roboto/Roboto-Thin.woff",
-                    "fonts/roboto/Roboto-Thin.woff2"
+                    "bin/materialize.js"
                 ],
                 "bower-asset-ignore": [
                     "jade/",
@@ -375,20 +360,20 @@
         },
         {
             "name": "macgyer/yii2-materializecss",
-            "version": "1.0.9",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MacGyer/yii2-materializecss.git",
-                "reference": "dfeb2d522cf1d2e17be74d4ae04cb2a73ca9fdf3"
+                "reference": "d33be424962ba051f1a2b889dc73d95f8145ce2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MacGyer/yii2-materializecss/zipball/dfeb2d522cf1d2e17be74d4ae04cb2a73ca9fdf3",
-                "reference": "dfeb2d522cf1d2e17be74d4ae04cb2a73ca9fdf3",
+                "url": "https://api.github.com/repos/MacGyer/yii2-materializecss/zipball/d33be424962ba051f1a2b889dc73d95f8145ce2f",
+                "reference": "d33be424962ba051f1a2b889dc73d95f8145ce2f",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/materialize": "0.97.6",
+                "bower-asset/materialize": "0.97.7",
                 "php": ">=5.4.0",
                 "yiisoft/yii2": "~2.0"
             },
@@ -417,7 +402,7 @@
                 "widgets",
                 "yii2"
             ],
-            "time": "2016-09-01 21:01:08"
+            "time": "2017-01-05 20:37:37"
         },
         {
             "name": "swiftmailer/swiftmailer",
