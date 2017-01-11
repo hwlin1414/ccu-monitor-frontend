@@ -3,9 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Html;
-//use yii\bootstrap\Nav;
-//use yii\bootstrap\NavBar;
+use app\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use macgyer\yii2materializecss\widgets\Nav;
@@ -110,7 +108,7 @@ echo SideNav::widget([
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Campus Network Association <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Html::a('Campus Network Association', 'https://www.cna.ccu.edu.tw', ['target' => '_blank']) ?> <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
