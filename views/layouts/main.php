@@ -53,7 +53,7 @@ $this->registerCss("
 <?php
 $items = [
     '<li>' . Html::img('@web/images/office.jpg', ['width' => 240]) . '</li>',
-    ['label' => Yii::t('yii', 'Home'), 'url' => ['/site/index'], 'linkOptions' => ['class' => 'waves-effect']],
+    ['label' => Yii::t('yii', 'Home'), 'url' => Yii::$app->homeUrl, 'linkOptions' => ['class' => 'waves-effect']],
     ['label' => '說明', 'url' => ['/site/about'], 'linkOptions' => ['class' => 'waves-effect']],
     '<li><div class="divider"></div></li>',
     [
