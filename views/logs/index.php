@@ -17,6 +17,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function($model){
+            $class = "";
+            switch($model->level){
+                case 'error':
+                    $class = "deep-orange lighten-4";
+                    break;
+                case 'warning':
+                    $class = "amber lighten-4";
+                    break;
+            }
+            return ['class' => $class];
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'ip',
