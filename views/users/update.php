@@ -23,20 +23,29 @@ $this->registerJs("$('select').material_select();");
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
 
         <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'group_id', [])->dropDownList(
-            ArrayHelper::map(Groups::find()->all(), 'id', 'name')
+            ArrayHelper::map(Groups::find()->all(), 'id', 'name'),
+            ['prompt' => '請選擇一個群組']
         ) ?>
 
-        <?= $form->field($model, 'enabled')->textInput() ?>
+        <div class="row">
+            <?= $form->field($model, 'enabled', [
+                'template' => "<div class=\"col s4\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+            ])->checkbox() ?>
 
-        <?= $form->field($model, 'verified')->textInput() ?>
+            <?= $form->field($model, 'verified', [
+                'template' => "<div class=\"col s4\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+            ])->checkbox() ?>
+        </div>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+            <?= Html::updateSubmit() ?>
+
         </div>
 
         <?php ActiveForm::end(); ?>

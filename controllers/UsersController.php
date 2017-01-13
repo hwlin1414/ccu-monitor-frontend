@@ -69,13 +69,16 @@ class UsersController extends Controller
     {
         $model = new Users();
 
+        $model->enabled = 1;
+        $model->verified = 1;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -88,13 +91,17 @@ class UsersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->setPassword($model->password);
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        $model->password = '';
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**

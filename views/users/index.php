@@ -34,8 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(Html::encode($group->name), ['/groups/view', 'id' => $group->id]);
                 },
             ],
-            'enabled',
-            'verified',
+            'enabled:boolean',
+            'verified:boolean',
             'registedip',
             'created_at',
         ],

@@ -65,6 +65,12 @@ $config = [
                 'logs' => 'logs/index',
             ],
         ],
+        'formatter' => [
+            'booleanFormat' => [
+                '<i class="material-icons">clear</i>',
+                '<i class="material-icons">done</i>',
+            ],
+        ],
         'session' => [
             'class' => 'yii\web\CacheSession',
             // 'cache' => 'mycache',
