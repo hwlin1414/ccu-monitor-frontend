@@ -61,7 +61,14 @@ class LoginForm extends Model
     {
         if ($this->validate()) {
             $user = $this->getUser();
-            if($user->enabled == 0 || $user->verified == 0){
+
+            $userVerifycation = GlobalConfig::findOne('userVerifycation');
+            if($userVerifycation->value == "1" && $user->verified == 0){
+                $this->addError('password', '帳號未審核或已被停用。');
+                return false;
+            }
+
+            if($user->enabled == 0){
                 $this->addError('password', '帳號未審核或已被停用。');
                 return false;
             }
