@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'user_id') ?>
+    <?= $form->field($model, 'user_id')->textInput(['autofocus' => true]) ?>
 
     <?= $form->field($model, 'ip') ?>
 

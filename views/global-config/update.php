@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $model->key;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'value')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
 
     <div class="form-group">
         <?= Html::updateSubmit() ?>
