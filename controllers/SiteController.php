@@ -80,7 +80,9 @@ class SiteController extends Controller
                 Yii::info(Yii::$app->user->identity->name.' 登入', 'app\site\login');
                 return $this->goBack();
             }
-            Yii::error($model->username.' 登入失敗', 'app\site\login');
+
+            $error = $model->getFirstError('password');
+            Yii::error("{$model->username} 登入失敗 ({$error})", 'app\site\login');
         }
         return $this->render('login', [
             'model' => $model,
