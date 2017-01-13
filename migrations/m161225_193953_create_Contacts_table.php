@@ -21,8 +21,8 @@ class m161225_193953_create_Contacts_table extends Migration
             'user_id' => $this->integer()->notNull(),
             'verified' => $this->string(15),
             'created_at' => $this->timestamp()->notNull(),
-            'updated_at' => $this->timestamp(),
-            'deleted_at' => $this->timestamp(),
+            'updated_at' => $this->timestamp()->defaultValue(null),
+            'deleted_at' => $this->timestamp()->defaultValue(null),
         ]);
 
         // creates index for column `user_id`

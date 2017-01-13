@@ -75,9 +75,12 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            Yii::info(Yii::$app->user->identity->name.' 登入', 'app\site\login');
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post())){
+            if($model->login()){
+                Yii::info(Yii::$app->user->identity->name.' 登入', 'app\site\login');
+                return $this->goBack();
+            }
+            Yii::error($model->username.' 登入失敗', 'app\site\login');
         }
         return $this->render('login', [
             'model' => $model,

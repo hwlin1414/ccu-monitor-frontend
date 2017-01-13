@@ -21,8 +21,8 @@ class m161225_194226_create_Hosts_table extends Migration
             'description' => $this->string(255)->notNull(),
             'user_id' => $this->integer()->notNull(),
             'created_at' => $this->timestamp()->notNull(),
-            'updated_at' => $this->timestamp(),
-            'deleted_at' => $this->timestamp(),
+            'updated_at' => $this->timestamp()->defaultValue(null),
+            'deleted_at' => $this->timestamp()->defaultValue(null),
         ]);
 
         // creates index for column `user_id`

@@ -23,8 +23,8 @@ class m161225_195255_create_Services_table extends Migration
             'port' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
             'created_at' => $this->timestamp()->notNull(),
-            'updated_at' => $this->timestamp(),
-            'deleted_at' => $this->timestamp(),
+            'updated_at' => $this->timestamp()->defaultValue(null),
+            'deleted_at' => $this->timestamp()->defaultValue(null),
         ]);
 
         // creates index for column `host_id`
