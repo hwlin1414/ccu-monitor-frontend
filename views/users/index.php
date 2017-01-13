@@ -17,6 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function($model){
+            $class = "";
+            if($model->enabled == 0){
+                $class = "grey lighten-2";
+            }else if($model->verified == 0){
+                $class = "amber lighten-4";
+            }
+            return ['class' => $class];
+        },
         'columns' => [
             'id',
             [
@@ -38,6 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'verified:boolean',
             'registedip',
             'created_at',
+            [
+                'format' => 'raw',
+                'value' => function($model, $key, $index, $widget){
+                    return Html::deleteButton(['delete', 'id' => $model->id]);
+                },
+            ],
         ],
     ]); ?>
 

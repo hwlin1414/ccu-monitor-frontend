@@ -40,11 +40,16 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'password', 'group_id', 'enabled', 'verified', 'registedip'], 'required'],
+            [['name', 'group_id', 'enabled', 'verified', 'registedip'], 'required'],
             [['group_id', 'enabled', 'verified'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 63, 'min' => 5],
-            [['password'], 'string', 'max' => 255, 'min' => 8],
+            [['password'], 'required', 'when' => function($model){
+                return $model->isNewRecord;
+            }],
+            [['password'], 'string', 'max' => 255, 'min' => 8, 'when' => function($model){
+                return $model->isNewRecord || $model->password !== "";
+            }],
             [['registedip'], 'string', 'max' => 15],
             [['name'], 'trim'],
             [['name'], 'unique'],
@@ -67,6 +72,15 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'registedip' => '註冊IP',
             'created_at' => '註冊日期',
             'updated_at' => '更新日期',
+        ];
+    }
+
+    public function scenarios()
+    {
+        return [
+            'default' => ['name', 'password', 'group_id', 'enabled', 'verified'],
+            'regist' => ['name', 'password'],
+            'self' => ['password'],
         ];
     }
 

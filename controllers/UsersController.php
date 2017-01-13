@@ -4,11 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\filters\AccessControl;
+use app\helpers\ModelHelper;
 use app\models\Users;
 use app\models\search\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -41,6 +43,7 @@ class UsersController extends Controller
     {
         $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['created_at' => SORT_DESC]]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -72,8 +75,17 @@ class UsersController extends Controller
         $model->enabled = 1;
         $model->verified = 1;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->setPassword($model->password);
+            $model->registedip = Yii::$app->request->userIp;
+
+            if($model->save()){
+                $diff = ModelHelper::compare($model, new Users(), ['enabled', 'verified']);
+                $diff = json_encode($diff);
+
+                yii::warning("新增使用者({$model->id}): {$model->name} {$diff}", 'app\users\create');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
@@ -90,10 +102,23 @@ class UsersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $oldModel = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->setPassword($model->password);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->updated_at = date('Y-m-d H:i:s');
+            if($model->password === ""){
+                $model->password = $oldModel->password;
+            }else{
+                $model->setPassword($model->password);
+            }
+
             if($model->save()){
+                $diff = ModelHelper::compare($model, $oldModel, ['name', 'enabled', 'verified', 'password']);
+                if(isset($diff['password'])) $diff['password'] = "changed";
+                $diff = json_encode($diff);
+
+                yii::warning("更新使用者({$model->id}): {$model->name} {$diff}", 'app\users\update');
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
@@ -112,7 +137,9 @@ class UsersController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        yii::warning("刪除使用者({$model->id}): {$model->name} (enabled: {$model->enabled}, verified: {$model->verified})", 'app\users\delete');
+        $model->delete();
 
         return $this->redirect(['index']);
     }

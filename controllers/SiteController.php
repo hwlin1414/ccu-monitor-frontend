@@ -96,8 +96,9 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::info(Yii::$app->user->identity->name.' 登出', 'app\site\logout');
-        Yii::$app->user->logout();
+        $user = Yii::$app->user;
+        Yii::info("{$user->identity->name} 登出", 'app\site\logout');
+        $user->logout();
 
         return $this->goHome();
     }

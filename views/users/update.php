@@ -25,7 +25,7 @@ $this->registerJs("$('select').material_select();");
 
         <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
 
-        <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'password', ['enableClientValidation' => false])->passwordInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'group_id', [])->dropDownList(
             ArrayHelper::map(Groups::find()->all(), 'id', 'name'),
