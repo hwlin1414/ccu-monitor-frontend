@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::updateButton(['update', 'id' => $model->id]) ?>
-        <?= Html::deleteButton(['delete', 'id' => $model->id]) ?>
+        <?= Html::updateButton(['update', 'name' => $model->name]) ?>
+        <?= Html::deleteButton(['delete', 'name' => $model->name]) ?>
     </p>
 
     <?= DetailView::widget([

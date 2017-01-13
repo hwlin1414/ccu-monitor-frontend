@@ -10,7 +10,7 @@ use macgyer\yii2materializecss\widgets\form\ActiveForm;
 
 $this->title = '修改帳號';
 $this->params['breadcrumbs'][] = ['label' => '帳號管理', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'name' => $model->name]];
 $this->params['breadcrumbs'][] = '修改';
 
 $this->registerJs("$('select').material_select();");

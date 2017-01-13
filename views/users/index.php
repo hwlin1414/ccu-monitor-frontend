@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function($model, $key, $index, $widget){
-                    return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                    return Html::a(Html::encode($model->name), ['view', 'name' => $model->name]);
                 },
             ],
             [
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'format' => 'raw',
                 'value' => function($model, $key, $index, $widget){
-                    return Html::deleteButton(['delete', 'id' => $model->id]);
+                    return Html::deleteButton(['delete', 'name' => $model->name]);
                 },
             ],
         ],

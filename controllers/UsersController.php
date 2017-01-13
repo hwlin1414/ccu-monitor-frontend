@@ -53,13 +53,13 @@ class UsersController extends Controller
 
     /**
      * Displays a single Users model.
-     * @param integer $id
+     * @param string $name
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($name)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($name),
         ]);
     }
 
@@ -84,7 +84,7 @@ class UsersController extends Controller
                 $diff = json_encode($diff);
 
                 yii::warning("新增使用者({$model->id}): {$model->name} {$diff}", 'app\users\create');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'name' => $model->name]);
             }
         }
 
@@ -96,13 +96,13 @@ class UsersController extends Controller
     /**
      * Updates an existing Users model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $name
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($name)
     {
-        $model = $this->findModel($id);
-        $oldModel = $this->findModel($id);
+        $model = $this->findModel($name);
+        $oldModel = $this->findModel($name);
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->updated_at = date('Y-m-d H:i:s');
@@ -119,7 +119,7 @@ class UsersController extends Controller
 
                 yii::warning("更新使用者({$model->id}): {$model->name} {$diff}", 'app\users\update');
 
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'name' => $model->name]);
             }
         }
 
@@ -132,12 +132,12 @@ class UsersController extends Controller
     /**
      * Deletes an existing Users model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $name
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($name)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($name);
         yii::warning("刪除使用者({$model->id}): {$model->name} (enabled: {$model->enabled}, verified: {$model->verified})", 'app\users\delete');
         $model->delete();
 
@@ -147,13 +147,13 @@ class UsersController extends Controller
     /**
      * Finds the Users model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param string $name
      * @return Users the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($name)
     {
-        if (($model = Users::findOne($id)) !== null) {
+        if (($model = Users::findOne(['name' => $name])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

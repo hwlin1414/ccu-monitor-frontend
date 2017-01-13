@@ -51,7 +51,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
                 return $model->isNewRecord || $model->password !== "";
             }],
             [['registedip'], 'string', 'max' => 15],
-            [['name'], 'trim'],
+            [['name'], 'match', 'pattern' => '/^[a-zA-Z0-9._]+$/'],
             [['name'], 'unique'],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Groups::className(), 'targetAttribute' => ['group_id' => 'id']],
         ];
