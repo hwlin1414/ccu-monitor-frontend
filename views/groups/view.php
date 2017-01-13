@@ -2,7 +2,7 @@
 
 use app\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\ActiveForm;
+use macgyer\yii2materializecss\widgets\form\ActiveForm;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */

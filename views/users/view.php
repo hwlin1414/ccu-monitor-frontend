@@ -1,28 +1,22 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '帳號管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::updateButton(['update', 'id' => $model->id]) ?>
+        <?= Html::deleteButton(['delete', 'id' => $model->id]) ?>
     </p>
 
     <?= DetailView::widget([
@@ -30,8 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'password',
-            'group_id',
+            [
+                'attribute' => 'group_id',
+                'value' => Html::encode($model->group->name),
+            ],
             'enabled',
             'verified',
             'registedip',

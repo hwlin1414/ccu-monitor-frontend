@@ -1,40 +1,47 @@
 <?php
 
-use yii\helpers\Html;
+use app\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = '帳號管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <p>
-        <?= Html::a('Create Users', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
-            'name',
-            'password',
-            'group_id',
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function($model, $key, $index, $widget){
+                    return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                },
+            ],
+            [
+                'attribute' => 'group_id',
+                'format' => 'raw',
+                'value' => function($model, $key, $index, $widget){
+                    $group = $model->group;
+                    return Html::a(Html::encode($group->name), ['/groups/view', 'id' => $group->id]);
+                },
+            ],
             'enabled',
-            // 'verified',
-            // 'registedip',
-            // 'created_at',
-            // 'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            'verified',
+            'registedip',
+            'created_at',
         ],
     ]); ?>
+
+    <p>
+        <?= Html::createButton() ?>
+    </p>
 </div>
