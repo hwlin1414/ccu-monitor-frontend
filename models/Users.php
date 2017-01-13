@@ -44,8 +44,9 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['group_id', 'enabled', 'verified'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 63, 'min' => 5],
-            [['password'], 'string', 'max' => 255],
+            [['password'], 'string', 'max' => 255, 'min' => 8],
             [['registedip'], 'string', 'max' => 15],
+            [['name'], 'trim'],
             [['name'], 'unique'],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Groups::className(), 'targetAttribute' => ['group_id' => 'id']],
         ];
@@ -58,20 +59,20 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'password' => 'Password',
-            'group_id' => 'Group ID',
-            'enabled' => 'Enabled',
-            'verified' => 'Verified',
-            'registedip' => 'Registedip',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => '帳號',
+            'password' => '密碼',
+            'group_id' => '群組',
+            'enabled' => '啟用',
+            'verified' => '審核',
+            'registedip' => '註冊IP',
+            'created_at' => '註冊日期',
+            'updated_at' => '更新日期',
         ];
     }
 
     public function setPassword($password)
     {
-        $this->password = password_hash('admin', PASSWORD_BCRYPT);
+        $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
 
     /**
