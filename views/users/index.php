@@ -1,7 +1,9 @@
 <?php
 
 use app\helpers\Html;
+use app\models\Groups;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\UsersSearch */
@@ -9,6 +11,8 @@ use yii\grid\GridView;
 
 $this->title = '帳號管理';
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJs("$('select').material_select();");
 ?>
 <div class="users-index">
 
@@ -32,12 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function($model, $key, $index, $widget){
-                    return Html::a(Html::encode($model->name), ['view', 'name' => $model->name]);
+                    return Html::a(Html::encode($model->name), ['update', 'name' => $model->name]);
                 },
             ],
             [
                 'attribute' => 'group_id',
                 'format' => 'raw',
+                'filter' => Html::activeDropDownList(
+                    $searchModel,
+                    'group_id',
+                    ArrayHelper::map(Groups::find()->all(), 'id', 'name'),
+                    ['class'=>'input-field','prompt' => '']
+                ),
                 'value' => function($model, $key, $index, $widget){
                     $group = $model->group;
                     return Html::a(Html::encode($group->name), ['/groups/view', 'id' => $group->id]);

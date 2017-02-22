@@ -6,6 +6,7 @@ use Yii;
 use app\filters\AccessControl;
 use app\helpers\ModelHelper;
 use app\models\Users;
+use app\models\search\LogsSearch;
 use app\models\search\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -64,6 +65,41 @@ class UsersController extends Controller
     }
 
     /**
+     * Displays a single Users model.
+     * @return mixed
+     */
+    public function actionSelf()
+    {
+        $model = $this->findModel(Yii::$app->user->identity->name);
+        $model->setScenario('self');
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->updated_at = date('Y-m-d H:i:s');
+            if($model->password === ""){
+                $model->password = $oldModel->password;
+            }else{
+                $model->setPassword($model->password);
+            }
+
+            if($model->save()){
+                yii::warning("更新密碼", 'app\users\self');
+            }
+        }
+        $model->password = '';
+
+        /* render */
+        $searchModel = new LogsSearch(['scenario' => 'self']);
+        $searchModel->user_id = Yii::$app->user->identity->id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['created_at' => SORT_DESC]]);
+
+        return $this->render('self', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
      * Creates a new Users model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -80,7 +116,7 @@ class UsersController extends Controller
             $model->registedip = Yii::$app->request->userIp;
 
             if($model->save()){
-                $diff = ModelHelper::compare($model, new Users(), ['enabled', 'verified']);
+                $diff = ModelHelper::compare($model, new Users(), ['enabled', 'verified', 'group_id']);
                 $diff = json_encode($diff);
 
                 yii::warning("新增使用者({$model->id}): {$model->name} {$diff}", 'app\users\create');
@@ -113,13 +149,13 @@ class UsersController extends Controller
             }
 
             if($model->save()){
-                $diff = ModelHelper::compare($model, $oldModel, ['name', 'enabled', 'verified', 'password']);
+                $diff = ModelHelper::compare($model, $oldModel, ['name', 'enabled', 'verified', 'password', 'group_id']);
                 if(isset($diff['password'])) $diff['password'] = "changed";
                 $diff = json_encode($diff);
 
                 yii::warning("更新使用者({$model->id}): {$model->name} {$diff}", 'app\users\update');
 
-                return $this->redirect(['view', 'name' => $model->name]);
+                return $this->redirect(['index']);
             }
         }
 

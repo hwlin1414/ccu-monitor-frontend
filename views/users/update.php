@@ -2,6 +2,7 @@
 
 use app\models\Groups;
 use app\helpers\Html;
+use yii\widgets\DetailView;
 use yii\helpers\ArrayHelper;
 use macgyer\yii2materializecss\widgets\form\ActiveForm;
 
@@ -10,14 +11,30 @@ use macgyer\yii2materializecss\widgets\form\ActiveForm;
 
 $this->title = '修改帳號';
 $this->params['breadcrumbs'][] = ['label' => '帳號管理', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'name' => $model->name]];
-$this->params['breadcrumbs'][] = '修改';
+$this->params['breadcrumbs'][] = $model->name;
 
 $this->registerJs("$('select').material_select();");
 ?>
 <div class="users-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'name',
+            [
+                'attribute' => 'group_id',
+                'value' => Html::encode($model->group->name),
+            ],
+            'enabled:boolean',
+            'verified:boolean',
+            'registedip',
+            'created_at',
+            'updated_at',
+        ],
+    ]) ?>
 
     <div class="users-form">
 

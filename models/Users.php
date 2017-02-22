@@ -48,7 +48,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
                 return $model->isNewRecord;
             }],
             [['password'], 'string', 'max' => 255, 'min' => 8, 'when' => function($model){
-                return $model->isNewRecord || $model->password !== "";
+                return $model->password !== "";
             }],
             [['registedip'], 'string', 'max' => 15],
             [['name'], 'match', 'pattern' => '/^[a-zA-Z0-9._]+$/'],

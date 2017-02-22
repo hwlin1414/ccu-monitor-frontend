@@ -67,6 +67,7 @@ $config = [
                 'users/<name:[a-zA-Z0-9._]+>/view' => 'users/view',
                 'users/<name:[a-zA-Z0-9._]+>/update' => 'users/update',
                 'users/<name:[a-zA-Z0-9._]+>/delete' => 'users/delete',
+                'self' => 'users/self',
                 'logs' => 'logs/index',
             ],
         ],

@@ -29,7 +29,10 @@ class LogsSearch extends Logs
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return [
+            'default' => ['id', 'user_id', 'ip', 'level', 'action', 'description', 'created_at'],
+            'self' => ['ip', 'description', 'craeted_at'],
+        ];
     }
 
     /**
